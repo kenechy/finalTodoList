@@ -20,19 +20,25 @@ export default class TodoModal extends React.Component {
     };
 
     toggleTodoComplete = (index) => {
-        let list = this.props.list;
-        list.todos[index].completed = !list.todos[index].completed;
-
-        this.props.updateList(list);
+        const updatedTodos = this.props.list.todos.map((todo, todoIndex) => {
+            if (index === todoIndex) {
+                return { ...todo, completed: !todo.completed };
+            }
+            return todo;
+        });
+    
+        const updatedList = { ...this.props.list, todos: updatedTodos };
+        this.props.updateList(updatedList);
     };
-
     
     deleteTodo = (index) => {
-        let list = this.props.list;
-        list.todos.splice(index, 1);
-
-        this.props.updateList(list);
+        const updatedTodos = this.props.list.todos.filter((todo, todoIndex) => index !== todoIndex);
+    
+        const updatedList = { ...this.props.list, todos: updatedTodos };
+        this.props.updateList(updatedList);
     };
+    
+    
 
     addTodo = () => {
         let list = this.props.list;
@@ -45,6 +51,10 @@ export default class TodoModal extends React.Component {
     };
 
     renderTodo = (todo, index) => {
+        if (!todo) {
+            return null;
+        }
+    
         return (
             <View style={styles.todoContainer}>
                 <TouchableOpacity onPress={() => this.toggleTodoComplete(index)}>

@@ -2,15 +2,15 @@ export default tempData = [
    
     {
         id: 1,
-      name: "Brieanne",
+      name: "me time",
       color: "#8022D9", 
       todos: [
         {
-          title: "Joyce Gwapa",
+          title: "Magstudy",
           completed: true
         },
         {
-          title: "Alsonado Panget",
+          title: "dula",
           completed: false
         }
       ]
